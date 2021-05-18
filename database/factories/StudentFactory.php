@@ -25,7 +25,7 @@ class StudentFactory extends Factory
         return [
             'name' => $this->faker->name,
             'date_birth' => $this->faker->date(),
-            'group_id' => 1,
+            'group_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

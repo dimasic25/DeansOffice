@@ -20,7 +20,7 @@ class Student extends Model
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 
     public function subjects(): BelongsToMany
