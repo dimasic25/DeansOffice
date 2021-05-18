@@ -21,6 +21,7 @@ class CreateSubjectStudentTable extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
+
         });
     }
 
