@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
@@ -15,19 +16,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // 20 subjects
-        $this->call(SubjectSeeder::class);
+        // 10 groups
+        $this->call(GroupSeeder::class);
 
         // 50 students
         $this->call(StudentSeeder::class);
 
+        // 20 subjects
+        $this->call(SubjectSeeder::class);
+
         $subjects = Subject::all();
+        $groups = Group::all();
         $students = Student::all();
 
-        // к каждому студенту привязываем от 8 до 10 предметов
-        $students->each(function ($student) use ($subjects) {
-           $student->subjects()->attach(
-               $subjects->random(rand(8, 10))->pluck('id')->toArray()
+        // к каждой группе привязываем от 10 до 20 студентов
+        $groups->each(function ($group) use ($students) {
+            $group->students()->attach(
+                $students->random(rand(10, 20))->pluck('id')->toArray()
+            );
+        });
+
+        // к каждому предмету привязываем 30 студентов
+        $subjects->each(function ($subject) use ($students) {
+           $subject->students()->attach(
+               $students->random(30)->pluck('id')->toArray()
            );
         });
     }

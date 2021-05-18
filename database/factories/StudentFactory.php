@@ -22,14 +22,10 @@ class StudentFactory extends Factory
      */
     public function definition()
     {
-        $group = Group::create([
-            'name' => $this->faker->realText(20),
-            'year' => $this->faker->year(2021),
-        ]);
         return [
             'name' => $this->faker->name,
             'date_birth' => $this->faker->date(),
-            'group_id' => $group->id,
+            'group_id' => 1,
         ];
     }
 }

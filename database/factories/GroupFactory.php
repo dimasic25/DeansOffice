@@ -24,7 +24,7 @@ class GroupFactory extends Factory
     {
         return [
             'name' => $this->faker->realText(20),
-            'mark' => rand(0, 100),
+            'year' => $this->faker->year(2021),
         ];
     }
 }
