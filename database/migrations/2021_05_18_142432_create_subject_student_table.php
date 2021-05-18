@@ -15,6 +15,7 @@ class CreateSubjectStudentTable extends Migration
     {
         Schema::create('subject_student', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('student_id');
 
