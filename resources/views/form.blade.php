@@ -13,7 +13,7 @@
             @method('put')
         @endisset
         <div class=" form-group">
-            <label for="formGroupExampleInput">Title</label>
+            <label for="formGroupExampleInput">Name</label>
             <input name="name"
                    value="{{isset($group) ? $group->name : null}}" type="text" class="form-control"
                    id="formGroupExampleInput" placeholder="Name">

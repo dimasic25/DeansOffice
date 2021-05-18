@@ -13,10 +13,7 @@ class Student extends Model
 
     protected $table = 'students';
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
+    protected $fillable = ['name', 'date_birth', 'group_id'];
 
     public function group(): BelongsTo
     {

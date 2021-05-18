@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
-class GroupsController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        $groups = Group::orderBy('id')->get();
-        return view('index', compact('groups'));
+        $students = Student::orderBy('id')->get();
+        return view('show', compact('students'));
     }
 
     /**
@@ -26,7 +25,7 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        return view('form');
+        return view('formStudent');
     }
 
     /**
@@ -37,58 +36,58 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        $group = new Group();
-        $group->name = $request->name;
-        $group->year = $request->year;
-        $group->save();
-        return redirect()->route('groups.index');
+        $student = new Student();
+        $student->name = $request->name;
+        $student->date_birth = $request->date_birth;
+        $student->group_id = $request->group_id;
+        $student->save();
+        return redirect()->route('students.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Group  $group
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Student $student)
     {
-        $students = Student::where('group_id', $group->id)->get();
-        return view('show', compact('students'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Group  $group
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Student $student)
     {
-        return view('form', compact('group'));
+        return view('formStudent', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Group  $group
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request, Student $student)
     {
-        $group->update($request->only(['name', 'year']));
-        return redirect()->route('groups.index');
+        $student->update($request->only(['name', 'date_birth', 'group_id']));
+        return redirect()->route('students.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Group  $group
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Student $student)
     {
-        $group->delete();
-        return redirect()->route('groups.index');
+        $student->delete();
+        return redirect()->route('students.index');
     }
 }
