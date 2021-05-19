@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\SubjectsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,5 @@ Route::redirect('/', 'groups');
 Route::resource('groups', GroupsController::class);
 
 Route::resource('students', StudentsController::class);
+
+Route::resource('subjects', SubjectsController::class);

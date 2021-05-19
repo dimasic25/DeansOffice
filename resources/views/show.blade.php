@@ -18,13 +18,14 @@
             <tr>
                 <th scope="row">{{$student->id}}</th>
                 <td>
-                   {{$student->name}}
+                    <a href="{{ route('students.show', $student) }}">{{$student->name}}</a>
                 </td>
                 <td>{{ $student->date_birth}}</td>
                 <td>
                     <form method="post" action="{{ route('students.destroy', $student)}}">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="btn btn-primary" href="{{route('students.edit',  $student)}}" role="button">Edit</a>
+                            <a class="btn btn-primary" href="{{route('students.edit',  $student)}}"
+                               role="button">Edit</a>
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -35,14 +36,6 @@
         @endforeach
         </tbody>
     </table>
-{{--    <form method="post" action="{{ route('groups.destroy', $group)}}">--}}
-{{--        <div class="btn-group mt-2" role="group" aria-label="Basic example">--}}
-{{--            <a class="btn btn-primary" href="{{route('groups.edit', $group)}}" role="button">Edit</a>--}}
-{{--            @csrf--}}
-{{--            @method('delete')--}}
-{{--            <button type="submit" class="btn btn-danger">Delete</button>--}}
-{{--        </div>--}}
-{{--    </form>--}}
 
     <a class="btn btn-secondary btn-lg mt-2" href="{{route('groups.index')}}" role="button">Back to Groups</a>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -52,7 +53,8 @@ class StudentsController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        $subjects = (Student::find($student->id))->subjects;
+        return view('showSubjects', compact('subjects'));
     }
 
     /**

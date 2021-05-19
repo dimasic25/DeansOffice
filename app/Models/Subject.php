@@ -12,10 +12,7 @@ class Subject extends Model
 
     protected $table = 'subjects';
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
+    protected $fillable = ['name', 'mark'];
 
     public function students(): BelongsToMany
     {
