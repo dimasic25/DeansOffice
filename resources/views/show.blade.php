@@ -3,7 +3,7 @@
 @section('title', 'Students')
 
 @section('content')
-    <a class="btn btn-primary" href="{{route('students.create')}}" role="button">Add new Student</a>
+    <a class="btn btn-primary" href="{{route('students.create', $id)}}" role="button">Add new Student</a>
     <table class="table">
         <thead>
         <tr>
@@ -22,7 +22,7 @@
                 </td>
                 <td>{{ $student->date_birth}}</td>
                 <td>
-                    <form method="post" action="{{ route('students.destroy', $student)}}">
+                    <form method="post" action="{{ route('students.destroy', [\App\Models\Student::find($student->id)->group,$student])}}">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a class="btn btn-primary" href="{{route('students.edit',  $student)}}"
                                role="button">Edit</a>

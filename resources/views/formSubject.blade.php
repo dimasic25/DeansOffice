@@ -28,6 +28,6 @@
         </div>
 
         <button class="btn btn-primary btn-lg" type="submit">{{isset($subject) ? 'Update' : 'Create'}}</button>
-        <a class="btn btn-secondary btn-lg" href="{{route('subjects.index', 1)}}" role="button">Back to Students</a>
+        <a class="btn btn-secondary btn-lg" href="{{route('subjects.index')}}" role="button">Back to Students</a>
     </form>
 @endsection

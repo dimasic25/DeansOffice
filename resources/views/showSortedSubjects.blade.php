@@ -4,7 +4,7 @@
 
 @section('content')
     <a class="btn btn-primary" href="{{route('subjects.create')}}" role="button">Add new Subject</a>
-    <a class="btn btn-primary" href="{{route('subjects.sort')}}" role="button">Sort</a>
+    {{--    <a class="btn btn-primary" href="{{route('subjects.sort')}}" role="button">Sort</a>--}}
     <table class="table">
         <thead>
         <tr>

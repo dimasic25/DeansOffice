@@ -52,8 +52,9 @@ class GroupsController extends Controller
      */
     public function show(Group $group)
     {
-        $students = Student::where('group_id', $group->id)->get();
-        return view('show', compact('students'));
+//        $students = Student::where('group_id', $group->id)->get();
+//        return view('show', compact('students'));
+        return redirect()->route('students.index', $group->id);
     }
 
     /**

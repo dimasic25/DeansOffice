@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubjectsController extends Controller
 {
@@ -14,7 +16,7 @@ class SubjectsController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::orderBy('id')->get();
+        $subjects = Subject::all();
         return view('showSubjects', compact('subjects'));
     }
 
@@ -89,4 +91,5 @@ class SubjectsController extends Controller
         $subject->delete();
         return redirect()->route('subjects.index');
     }
+
 }

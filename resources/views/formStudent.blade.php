@@ -4,9 +4,9 @@
 
 @section('content')
     <form method="post"
-          @if(isset($student))action="{{ route('students.update', $student) }}"
+          @if(isset($student))action="{{ route('students.update', [$group, $student->id]) }}"
           @else
-          action="{{ route('students.store') }}"
+          action="{{ route('students.store', $group) }}"
         @endif>
         @csrf
         @isset($student)
@@ -30,12 +30,12 @@
         <div class="form-group">
             <label for="formGroupExampleInput">Group</label>
             <input name="group_id"
-                   value="{{isset($student) ? $student->group_id : null}}" type="text"
+                   value="{{isset($student) ? $student->group_id : $id}}" type="text" readonly
                    class="form-control"
                    id="formGroupExampleInput" placeholder="Group_id">
         </div>
 
         <button class="btn btn-primary btn-lg" type="submit">{{isset($student) ? 'Update' : 'Create'}}</button>
-        <a class="btn btn-secondary btn-lg" href="{{route('students.index')}}" role="button">Back to Groups</a>
+        <a class="btn btn-secondary btn-lg" href="{{route('students.index', $id)}}" role="button">Back to Groups</a>
     </form>
 @endsection
