@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupsController extends Controller
 {
@@ -94,6 +95,8 @@ class GroupsController extends Controller
             $subjects = $student->subjects;
             foreach ($subjects as $note) {
                 $student->subjects()->detach($note);
+                DB::table('student_subject')->where([['student_id', $student->id],
+                    ['subject_id', $note->id]])->delete();
             }
             $student->delete();
         }

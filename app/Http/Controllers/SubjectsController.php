@@ -114,29 +114,25 @@ class SubjectsController extends Controller
      */
     public function destroy($group, $student, Subject $subject)
     {
-//        $student = Student::find($student);
-//        $student->subjects()->detach($subject);
-        $students = $subject->students;
-        foreach ($students as $note) {
-            $subject->students()->detach($note);
-        }
-        $subject->delete();
+        $student = Student::find($student);
+        $student->subjects()->detach($subject);
+        DB::table('student_subject')->where([['student_id', $student->id],
+            ['subject_id', $subject->id]])->delete();
         return redirect()->route('subjects.index', [
             'group' => $group,
-            'student' => $student,
+            'student' => $student->id,
         ]);
     }
 
-    public function sort($group, $student,$order) {
+    public function sort($group, $student, $order)
+    {
         $subjects = (Student::find($student))->subjects;
         $subjects = collect($subjects);
         if ($order == 1) {
             $subjects = $subjects->sortBy('name')->values()->all();
-        }
-        else if ($order == 2) {
+        } else if ($order == 2) {
             $subjects = $subjects->sortBy('mark')->values()->all();
-        }
-        else {
+        } else {
             $subjects = $subjects->sortBy('id')->values()->all();
         }
         return view('showSubjects', [
