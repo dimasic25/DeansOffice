@@ -48,7 +48,7 @@ Route::prefix('groups/{group}/students/{student}')->group(function () {
 
     Route::get('/subjects/create', [SubjectsController::class, 'create'])->name('subjects.create');
 
-    Route::get('/subjects/{subject}', [SubjectsController::class, 'show']);
+    Route::get('/subjects/{subject}', [SubjectsController::class, 'show'])->name('subjects.show');
 
     Route::put('/subjects/{subject}', [SubjectsController::class, 'update'])->name('subjects.update');
 

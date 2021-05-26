@@ -64,9 +64,15 @@ class SubjectsController extends Controller
      * @param \App\Models\Subject $subject
      * @return \Illuminate\Http\Response
      */
-    public function show(Subject $subject)
+    public function show($group, $student, Subject $subject)
     {
-        //
+        $students = $subject->students;
+        return view('showStudents', [
+            'subject' => $subject,
+            'group' => $group,
+            'student' => $student,
+            'students' => $students,
+        ]);
     }
 
     /**
