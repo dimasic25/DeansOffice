@@ -89,6 +89,14 @@ class GroupsController extends Controller
      */
     public function destroy(Group $group)
     {
+        $students = $group->students;
+        foreach ($students as $student) {
+            $subjects = $student->subjects;
+            foreach ($subjects as $note) {
+                $student->subjects()->detach($note);
+            }
+            $student->delete();
+        }
         $group->delete();
         return redirect()->route('groups.index');
     }

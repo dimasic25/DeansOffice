@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', isset($student) ? 'Update record' : 'Create new record')
+@section('title', isset($student) ? 'Update note' : 'Create new note')
 
 @section('content')
     <form method="post"
@@ -27,7 +27,7 @@
                    id="formGroupExampleInput">
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="formGroupExampleInput">Group</label>
             <input name="group_id"
                    value="{{isset($student) ? $student->group_id : $id}}" type="text" readonly
@@ -35,7 +35,10 @@
                    id="formGroupExampleInput" placeholder="Group_id">
         </div>
 
-        <button class="btn btn-primary btn-lg" type="submit">{{isset($student) ? 'Update' : 'Create'}}</button>
-        <a class="btn btn-secondary btn-lg" href="{{route('students.index', $id)}}" role="button">Back to Groups</a>
+            <button class="btn btn-primary btn-lg" type="submit">{{isset($student) ? 'Update' : 'Create'}}</button>
+            <a class="btn btn-secondary btn-lg" href="{{route('students.index', $id)}}" role="button">Back to Groups</a>
+
+
+
     </form>
 @endsection

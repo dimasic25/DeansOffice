@@ -4,6 +4,9 @@
 
 @section('content')
     <a class="btn btn-primary" href="{{route('students.create', $id)}}" role="button">Add new Student</a>
+    <a class="btn btn-primary" href="{{route('students.sort', [$id, 1])}}" role="button">Sort by Name</a>
+    <a class="btn btn-primary" href="{{route('students.sort', [$id, 2])}}" role="button">Sort by Date_birth</a>
+    <a class="btn btn-primary" href="{{route('students.sort', [$id, 3])}}" role="button">Sort by Id</a>
     <table class="table">
         <thead>
         <tr>
@@ -18,13 +21,15 @@
             <tr>
                 <th scope="row">{{$student->id}}</th>
                 <td>
-                    <a href="{{ route('students.show', $student) }}">{{$student->name}}</a>
+                    <a href="{{ route('students.show', [\App\Models\Student::find($student->id)->group, $student]) }}">{{$student->name}}</a>
                 </td>
                 <td>{{ $student->date_birth}}</td>
                 <td>
-                    <form method="post" action="{{ route('students.destroy', [\App\Models\Student::find($student->id)->group,$student])}}">
+                    <form method="post"
+                          action="{{ route('students.destroy', [\App\Models\Student::find($student->id)->group,$student])}}">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="btn btn-primary" href="{{route('students.edit',  $student)}}"
+                            <a class="btn btn-primary"
+                               href="{{route('students.edit',  [\App\Models\Student::find($student->id)->group,$student])}}"
                                role="button">Edit</a>
                             @csrf
                             @method('delete')

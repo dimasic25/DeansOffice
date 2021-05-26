@@ -56,10 +56,15 @@ class StudentsController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($group, $student)
     {
+        $student = Student::find($student);
         $subjects = (Student::find($student->id))->subjects;
-        return view('showSubjects', compact('subjects'));
+        return view('showSubjects', [
+            'subjects' => $subjects,
+            'group' => $group,
+            'student' => $student->id,
+        ]);
     }
 
     /**
@@ -68,9 +73,10 @@ class StudentsController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($group, $student)
     {
-        $group = (Student::find($student->group_id))->group;
+        $group = (Student::find($group))->group;
+        $student = Student::find($student);
         return view('formStudent', [
             'student' => $student,
             'id' => $student->group_id,
@@ -100,7 +106,26 @@ class StudentsController extends Controller
      */
     public function destroy($group, Student $student)
     {
+        $subjects = $student->subjects;
+        foreach ($subjects as $note) {
+            $student->subjects()->detach($note);
+        }
         $student->delete();
         return redirect()->route('students.index', $group);
+    }
+
+    public function sort($id, $order) {
+        $students = (Group::find($id))->students;
+        $students = collect($students);
+        if ($order == 1) {
+            $students = $students->sortBy('name')->values()->all();
+        }
+        else if ($order == 2) {
+            $students = $students->sortBy('date_birth')->values()->all();
+        }
+        else {
+            $students = $students->sortBy('id')->values()->all();
+        }
+        return view('show', compact('students'))->with('id', $id);
     }
 }

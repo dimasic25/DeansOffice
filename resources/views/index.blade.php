@@ -3,7 +3,7 @@
 @section('title', 'Groups')
 
 @section('content')
-    <a class="btn btn-primary" href="{{route('groups.create')}}" role="button">Create new record</a>
+    <a class="btn btn-primary" href="{{route('groups.create')}}" role="button">Create new note</a>
 
     <table class="table">
         <thead>

@@ -21,22 +21,40 @@ Route::redirect('/', 'groups');
 
 Route::resource('groups', GroupsController::class);
 
-Route::resource('students', StudentsController::class);
-
 //Route::resource('subjects', SubjectsController::class);
 
 Route::prefix('groups/{group}')->group(function () {
-    Route::get('/students', [StudentsController::class, 'index'])->name('students.index');
+    Route::any('/students', [StudentsController::class, 'index'])->name('students.index');
 
     Route::post('/students', [StudentsController::class, 'store'])->name('students.store');
 
     Route::get('/students/create', [StudentsController::class, 'create'])->name('students.create');
 
-    //Route::get('/students/{student}', [StudentsController::class, 'show']);
+    Route::get('/students/{student}', [StudentsController::class, 'show'])->name('students.show');
 
     Route::put('/students/{student}', [StudentsController::class, 'update'])->name('students.update');
 
     Route::delete('/students/{student}', [StudentsController::class, 'destroy'])->name('students.destroy');
+
+    Route::get('/students/{student}/edit', [StudentsController::class, 'edit'])->name('students.edit');
+
+    Route::any('/students/sort/{order}', [StudentsController::class, 'sort'])->name('students.sort');
 });
 
-Route::get('subjects/sort', [DataController::class, 'sort'])->name('subjects.sort');
+Route::prefix('groups/{group}/students/{student}')->group(function () {
+    Route::any('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
+
+    Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
+
+    Route::get('/subjects/create', [SubjectsController::class, 'create'])->name('subjects.create');
+
+    Route::get('/subjects/{subject}', [SubjectsController::class, 'show']);
+
+    Route::put('/subjects/{subject}', [SubjectsController::class, 'update'])->name('subjects.update');
+
+    Route::delete('/subjects/{subject}', [SubjectsController::class, 'destroy'])->name('subjects.destroy');
+
+    Route::get('/subjects/{subject}/edit', [SubjectsController::class, 'edit'])->name('subjects.edit');
+
+    Route::any('/subjects/sort/{order}', [SubjectsController::class, 'sort'])->name('subjects.sort');
+});
