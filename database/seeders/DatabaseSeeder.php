@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         $students->each(function ($student) use ($subjects) {
            $student->subjects()->attach(
-               $subjects->random(rand(10, 12))->pluck('id')->toArray()
+               $subjects->random(rand(7, 10))->pluck('id')->toArray()
            );
         });
     }

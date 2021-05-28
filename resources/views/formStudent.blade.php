@@ -36,7 +36,7 @@
         </div>
 
             <button class="btn btn-primary btn-lg" type="submit">{{isset($student) ? 'Update' : 'Create'}}</button>
-            <a class="btn btn-secondary btn-lg" href="{{route('students.index', $id)}}" role="button">Back to Groups</a>
+            <a class="btn btn-secondary btn-lg" href="{{route('students.index', $id)}}" role="button">Back to Students</a>
 
 
 
